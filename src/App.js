@@ -6,7 +6,7 @@ import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
-	Link
+	NavLink
 } from "react-router-dom";
 
 import logo from './logo.svg';
@@ -14,19 +14,18 @@ import './App.css';
 
 function App() {
 	return (
-
- <Router>
-			<div>
+		<div className="wrapper">
+ 		<Router>
+			<nav>
 				<ul>
 					<li>
-						<Link to="/">Search</Link>
+						<NavLink exact activeClassName="active" to="/">Search</NavLink>
 					</li>
 					<li>
-						<Link to="/history">History</Link>
+						<NavLink exact activeClassName="active" to="/history">History</NavLink>
 					</li>
 				</ul>
-
-				<hr />
+			</nav>
 
 				{/*
 					A <Switch> looks through all its children <Route>
@@ -39,12 +38,13 @@ function App() {
 					<Route exact path="/">
 						<Search />
 					</Route>
-					<Route path="/History">
+					<Route path="/history">
 						<History />
 					</Route>
 				</Switch>
-			</div>
+			
 		</Router>
+		</div>
 	);
 }
 

@@ -73,11 +73,9 @@ class Search extends Component {
 
 					<hr />
 
-					<div>
-					<pre>
+					<pre className="codeBlock">
 						{JSON.stringify(this.props.searchResults, null, 2) }
 					</pre>
-					</div>
 
 			</div>
 
