@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+## Test React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This small react app is a simple search to query stories from [Hacker News Algolia API](https://hn.algolia.com/api) and display results.
+
+It also has a History tab to show a list of terms that used for successful searching (terms that returned results).
 
 ## Available Scripts
 
@@ -23,4 +25,8 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+## Getting Started with Create React App
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

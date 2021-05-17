@@ -23,14 +23,12 @@ export const newsSearch = (query) => {
 					let payload = {}
 
 					if (_.get(response,'data.hits', []).length > 0) {
-						// console.log("got hits! : ", response.data.hits)
 						payload = {
 							results: response.data.hits, 
 							query: query
 						}
 					} else {
 						payload = { message: `No results found for '${query}'` }
-						console.log(payload.message)
 					}
 					
 					dispatch({ type: NEWS_SEARCH, payload: payload });
@@ -40,8 +38,6 @@ export const newsSearch = (query) => {
 					console.log("error...", err)
 					dispatch({ type: NEWS_SEARCH, payload: { message: 'no results found' }});
 				});
-
-			// dispatch({ type: NEWS_SEARCH, payload: {} });
 
 		};
 	}	

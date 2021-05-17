@@ -16,7 +16,7 @@ class Search extends Component {
 			showData: false,
 		}
 
-		console.log("Search constructor")
+		// clear out previous search results
 		this.props.clearSearchResults()
 	}
 
@@ -29,18 +29,6 @@ class Search extends Component {
 
 	submitHandler = event => {
 		this.props.newsSearch(this.state.value)
-
-		// if (this.state.value.length > 2) {			
-		// 	this.props.newsSearch(this.state.value)
-
-		// 	this.setState({
-		// 		textFieldMessage: null
-		// 	})
-		// } else {
-		// 	this.setState({
-		// 		textFieldMessage: "Please enter a valid search term."
-		// 	})
-		// }
 	}
 
 	showFullData = event => {
@@ -53,19 +41,18 @@ class Search extends Component {
 	render() {
 		const { props } = this.props
 
-		console.log("Search render")
-
-		const searchResults = _.get(this.props,'searchResults', []);
-		let resultsCount;
-		if (searchResults.length > 0) {
-			resultsCount = <div className="resultsCount"><span>{this.props.searchResults.length} results returned</span></div>;
-		}
-
 		const searchMessage = _.get(this.props,'searchMessage');
 		let resultsMessage;
 		if (searchMessage) {
 			resultsMessage = <div className="errMessage">{searchMessage}</div>;
 		}
+
+		const searchResults = _.get(this.props,'searchResults', []);
+		let resultsCount;
+		if (searchResults.length > 0) {
+			resultsCount = <span>{this.props.searchResults.length} results returned</span>;
+		}
+
 
 		return (
 			<div>
@@ -88,15 +75,13 @@ class Search extends Component {
 					<Button variant="outlined"  aria-label="Search"  onClick={this.submitHandler} style={{ margin:"0 0 0 15px", padding: "6px 20px" }} >
 						Search
 					</Button>
-
-					{/*
-					<span style={{ color:"red", paddingLeft:"20px" }}>{this.state.textFieldMessage}</span>
-					*/}
-
 				</div>
 					
 				{resultsMessage}
-				{resultsCount}
+
+				<div className="resultsCount">
+					{resultsCount}
+				</div>
 
 				<div className="searchResultsList">
 					{ searchResults.length > 0 ? (
@@ -104,6 +89,10 @@ class Search extends Component {
 							return <SearchRecord props={r} key={index} />
 						})
 					) : null }
+				</div>
+
+				<div className="resultsCount resultsCountBtm">
+					{resultsCount}
 				</div>
 
 				<hr />

@@ -8,10 +8,10 @@
 	general layout and font settings 
 	------------------------------------- */
 body {
-  margin: 0;
-  font:14px / 1.4em 'Fira Code', 'Helvetica', 'Arial', sans-serif;
-  color:#333;
-  background-color: #888;
+	margin: 0;
+	font:14px / 1.4em 'Fira Code', 'Helvetica', 'Arial', sans-serif;
+	color:#333;
+	background-color: #888;
 }
 
 div.wrapper {
@@ -24,8 +24,8 @@ div.wrapper {
 }
 
 code, .code {
-  font-family: Consolas, 'Courier New', monospace;
-  color: #888;
+	font-family: Consolas, 'Courier New', monospace;
+	color: #888;
 }
 
 .codeBlock {
@@ -33,12 +33,12 @@ code, .code {
 	padding:10px;
 	margin:0;
 	background-color: #eee;
-    overflow-x: auto;
-    white-space: pre-wrap;
-    white-space: -moz-pre-wrap;
-    white-space: -pre-wrap;
-    white-space: -o-pre-wrap;
-    word-wrap: break-word;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	white-space: -moz-pre-wrap;
+	white-space: -pre-wrap;
+	white-space: -o-pre-wrap;
+	word-wrap: break-word;
 }
 .codeBlock:empty {
 	display: none;
@@ -129,13 +129,22 @@ nav li a:hover {
 	text-align: right;
 	padding:0;
 	border-bottom:1px dashed #444;
+	font-size:12px;
 }
 .resultsCount span {
-	background-color: #777;
-	color:#eee;
-	padding:8px 16px;
+	background-color: #888;
+	color:#fafafa;
+	padding:6px 16px;
 	display:inline-block;
 	border-top-left-radius: 6px
+}
+.resultsCountBtm {
+	border-bottom: none;
+	margin-bottom: 15px;
+}
+.resultsCountBtm span {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 6px;
 }
 
 .searchResultsList > div {

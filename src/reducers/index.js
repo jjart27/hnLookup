@@ -25,4 +25,3 @@ export default function(state = { searchHistory: [] }, action) {
 	return state;
 
 }
-

@@ -4,19 +4,14 @@ import { connect } from 'react-redux';
 class History extends Component {
 	constructor(props) {
 		super(props);
-
-		console.log("History constructor")
 	}
 
 	render() {
-
-		console.log("History render")
-		
 		return (
 			<div>
 				<h1>search history</h1>
 				<p>
-					Below is a list of searched terms you've used which returned results.
+					Below is a list of searched terms you have used which returned results.
 				</p>
 
 				{ this.props.searchHistory.length > 0 ? (
