@@ -1,11 +1,26 @@
+/*	-------------------------------------
+	import fonts from goooog
+	------------------------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;1,300;1,400&display=swap');
 
 
+/*	-------------------------------------
+	general layout and font settings 
+	------------------------------------- */
 body {
   margin: 0;
   font:14px / 1.4em 'Fira Code', 'Helvetica', 'Arial', sans-serif;
   color:#333;
   background-color: #888;
+}
+
+div.wrapper {
+	max-width: 940px;
+	background-color: white;
+	padding:15px 30px 30px 30px;
+	margin:0 auto;	
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
 }
 
 code, .code {
@@ -16,12 +31,40 @@ code, .code {
 .codeBlock {
 	border-radius: 8px;
 	padding:10px;
+	margin:0;
 	background-color: #eee;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
 }
 .codeBlock:empty {
 	display: none;
 }
 
+h1 {
+	font-size:36px;
+	line-height: 1em;
+	border-bottom:1px dashed #ccf;
+	padding:20px 0 5px 0;
+	margin:0 0 15px 0;
+}
+
+p {
+	font:15px/1.4em 'Merriweather';
+}
+
+.errMessage {
+	color:red;
+	display:inline-block;
+	padding:15px 0;
+}
+
+/*	-------------------------------------
+	navigation 
+	------------------------------------- */
 
 nav {
 	display:block;
@@ -41,7 +84,7 @@ nav li {
 }
 nav li a {
 	display:inline-block;
-	padding:15px 20px;
+	padding:15px 24px;
 	background-color: #eee;
 	text-decoration: none;
 	color:#444;
@@ -52,48 +95,23 @@ nav li a {
 	font-size:16px;
 	line-height: 1em;
 	text-transform: uppercase;
-}
-
-
-h1 {
-	font-size:36px;
-	line-height: 1em;
-	border-bottom:1px dashed #ccf;
-	padding:20px 0 5px 0;
-	margin:0 0 15px 0;
-}
-
-p {
-	font:15px/1.4em 'Merriweather';
+	transition:all .3s;
 }
 
 
 nav li a.active {
-	background-color: #ccc;
+	background-color: #cacaca;
 }
 nav li a:hover {
 	background-color: #ddd;
 }
 
-div.wrapper {
-	max-width: 940px;
-	background-color: white;
-	padding:15px 30px;
-	margin:0 auto;	
-}
 
-/*
-div.flexContainer {
-	display:flex;
-	flex-wrap: nowrap;
-}
 
-div.flexItem {
-	flex-basis: auto;
-	flex-basis:auto;
-}
-*/
 
+/*	-------------------------------------
+	Material UI overrides 
+	------------------------------------- */
 
 .MuiInputBase-root .MuiInputBase-input {
 	padding: 9px;
@@ -102,6 +120,9 @@ div.flexItem {
 
 
 
+/*	-------------------------------------
+	search results styles
+	------------------------------------- */
 
 .resultsCount {
 	font-weight: bold;
@@ -117,18 +138,39 @@ div.flexItem {
 	border-top-left-radius: 6px
 }
 
-
-.searchResultsList div {
+.searchResultsList > div {
 	border-bottom:1px dashed #888;
-	padding:4px;
+	margin-top:1px;
+	/*padding:4px;*/
 	font-size:13px;
 	opacity:0.7;
 	transition:all .3s;
 }
-.searchResultsList div:nth-of-type(odd) {
+.searchResultsList > div > div {
+	padding: 4px;
+}
+.searchResultsList > div:nth-of-type(odd) {
 	background-color:#f0f0f0;
 }
-.searchResultsList div:hover {
+.searchResultsList > div:hover {
 	opacity:1;
 	background-color:#def;
 }
+.searchResultItem em {
+	font-weight:bold;
+}
+
+
+span.toggleFullData {
+	background: rgba(230,230,230,0.7);
+	padding: 5px 8px;
+	font-size: 12px;
+	cursor: pointer;
+	display: block;
+	position: absolute ;
+}
+.searchResultsList span.toggleFullData {
+	right: 0 ;
+	top: 0;
+}
+

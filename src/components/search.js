@@ -1,16 +1,23 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { TextField, Button } from '@material-ui/core';
-import { newsSearch } from '../actions';
+import { newsSearch, clearSearchResults } from '../actions';
 import _ from 'lodash';
+
+import SearchRecord from './searchrecord.js';
+
 
 class Search extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			value: ""
+			value: "",
+			showData: false,
 		}
+
+		console.log("Search constructor")
+		this.props.clearSearchResults()
 	}
 
 
@@ -21,27 +28,32 @@ class Search extends Component {
 	};
 
 	submitHandler = event => {
-		console.log(this.state.value, " / ", this.state.value.length)
-		if (this.state.value.length > 2) {			
-			this.props.newsSearch(this.state.value)
+		this.props.newsSearch(this.state.value)
 
-			this.setState({
-				textFieldMessage: null
-			})
-		} else {
-			this.setState({
-				textFieldMessage: "Please enter a valid search term."
-			})
-		}
+		// if (this.state.value.length > 2) {			
+		// 	this.props.newsSearch(this.state.value)
+
+		// 	this.setState({
+		// 		textFieldMessage: null
+		// 	})
+		// } else {
+		// 	this.setState({
+		// 		textFieldMessage: "Please enter a valid search term."
+		// 	})
+		// }
 	}
+
+	showFullData = event => {
+		this.setState({
+			showData: !this.state.showData
+		})
+	};
+
 
 	render() {
 		const { props } = this.props
 
-		// console.log("search render")
-		// console.log("state: ", this.state)
-		console.log("props: ", this.props)
-		console.log("state: ", this.state)
+		console.log("Search render")
 
 		const searchResults = _.get(this.props,'searchResults', []);
 		let resultsCount;
@@ -52,7 +64,7 @@ class Search extends Component {
 		const searchMessage = _.get(this.props,'searchMessage');
 		let resultsMessage;
 		if (searchMessage) {
-			resultsMessage = <div>{searchMessage}</div>;
+			resultsMessage = <div className="errMessage">{searchMessage}</div>;
 		}
 
 		return (
@@ -60,10 +72,10 @@ class Search extends Component {
 
 				<h1>search</h1>
 				<p>
-					Use the search field below to search the Hacker News Algolia API and displays a list of results.
+					Use the search field below to search <em>stories</em> via the Hacker News Algolia API and display a list of results.
 				</p>
 
-					<div>
+				<div>
 					<TextField
 						multiline={false}
 						onChange={this.handleChange}
@@ -77,26 +89,36 @@ class Search extends Component {
 						Search
 					</Button>
 
+					{/*
 					<span style={{ color:"red", paddingLeft:"20px" }}>{this.state.textFieldMessage}</span>
+					*/}
 
-					</div>
-
+				</div>
 					
-					{resultsMessage}
-					{resultsCount}
+				{resultsMessage}
+				{resultsCount}
 
-					<div className="searchResultsList">
-					{searchResults.map(function(r, index){
-						return <div key={ index }>{r.title}</div>;
-					})}
+				<div className="searchResultsList">
+					{ searchResults.length > 0 ? (
+						searchResults.map(function(r, index){
+							return <SearchRecord props={r} key={index} />
+						})
+					) : null }
+				</div>
+
+				<hr />
+
+				{ searchResults.length > 0 ? (
+					<div style={{height:"35px", marginTop:"30px"}}>
+						<span onClick={this.showFullData} className="toggleFullData">{ this.state.showData ? ( 'hide' ) : 'view' } full data</span>
 					</div>
+				) : null }
 
-					<hr />
-
-					<span >view raw data</span>
+				{ this.state.showData ? (
 					<pre className="codeBlock">
-						{JSON.stringify(this.props.searchResults, null, 2) }
+						{JSON.stringify(this.props, null, 2) }
 					</pre>
+				) : null }
 
 			</div>
 
@@ -112,7 +134,6 @@ const mapStateToProps = ({ searchResults, searchMessage }) => {
 	};
 }
 
-const mapDispatchToProps = { newsSearch };
+const mapDispatchToProps = { newsSearch, clearSearchResults };
 
-// export default Search
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

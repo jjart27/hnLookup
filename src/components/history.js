@@ -1,49 +1,30 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Input, Button } from '@material-ui/core';
-import _ from 'lodash';
-
 
 class History extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			value: ""
-		}
-	}
-
-
-	handleChange = event => {
-		this.setState({
-			value: event.target.value
-		})
-	};
-
-	searchHandler = event => {
-		// console.log("searchHandler: ", this.state);
-		this.props.newsSearch(this.state.value)
-	}
-
-	componentWillReceiveProps (nextProps) {
-		// console.log("componentWillReceiveProps")
-		// console.log(nextProps)
-		this.setState({
-			searchHistory: _.get(nextProps, 'searchHistory', {} )
-		})
+		console.log("History constructor")
 	}
 
 	render() {
-		return (
-			<Fragment>
 
-					<div>
-					<pre>
-						{JSON.stringify(this.props.searchHistory, null, 2) }
-					</pre>
-					</div>
-					<hr />
-			</Fragment>
+		console.log("History render")
+		
+		return (
+			<div>
+				<h1>search history</h1>
+				<p>
+					Below is a list of searched terms you've used which returned results.
+				</p>
+
+				{ this.props.searchHistory.length > 0 ? (
+					this.props.searchHistory.map(function(r, index){
+						return <li key={index}>{r}</li>
+					})
+				) : <div className="errMessage">No recent search terms recorded</div> }
+			</div>
 		)
 	}
 
@@ -54,7 +35,5 @@ const mapStateToProps = ({ searchHistory }) => {
 		searchHistory: searchHistory
 	};
 }
-
-// const mapDispatchToProps = { newsSearch };
 
 export default connect(mapStateToProps, {})(History);
