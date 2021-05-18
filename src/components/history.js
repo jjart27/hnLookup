@@ -11,14 +11,14 @@ class History extends Component {
 			<div>
 				<h1>search history</h1>
 				<p>
-					Below is a list of searched terms you have used which returned results.
+					Below is a list of unique searched terms you have used which returned results.
 				</p>
 
 				{ this.props.searchHistory.length > 0 ? (
 					this.props.searchHistory.map(function(r, index){
 						return <li key={index}>{r}</li>
 					})
-				) : <div className="errMessage">No recent search terms recorded</div> }
+				) : <div className="errMessage">No recent search terms recorded.</div> }
 			</div>
 		)
 	}

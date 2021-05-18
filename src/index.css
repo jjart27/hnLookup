@@ -53,7 +53,7 @@ h1 {
 }
 
 p {
-	font:15px/1.4em 'Merriweather';
+	font:15px/1.6em 'Merriweather';
 }
 
 .errMessage {
@@ -127,9 +127,10 @@ nav li a:hover {
 .resultsCount {
 	font-weight: bold;
 	text-align: right;
-	padding:0;
-	border-bottom:1px dashed #444;
 	font-size:12px;
+	padding:0;
+	border-bottom:1px solid #aaa;
+	margin-top:10px;
 }
 .resultsCount span {
 	background-color: #888;
@@ -141,16 +142,17 @@ nav li a:hover {
 .resultsCountBtm {
 	border-bottom: none;
 	margin-bottom: 15px;
+	margin-top:0;
 }
 .resultsCountBtm span {
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 6px;
 }
 
+
 .searchResultsList > div {
 	border-bottom:1px dashed #888;
 	margin-top:1px;
-	/*padding:4px;*/
 	font-size:13px;
 	opacity:0.7;
 	transition:all .3s;

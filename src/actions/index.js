@@ -9,7 +9,7 @@ import _ from 'lodash';
 export const newsSearch = (query) => {
 	if (query.length < 3) {
 		return function (dispatch) {
-			dispatch({ type: NEWS_SEARCH, payload: { results: [], message: 'please enter a valid search term' }});
+			dispatch({ type: NEWS_SEARCH, payload: { results: [], message: 'Please enter a valid search term.' }});
 		};
 
 	} else {
@@ -28,7 +28,7 @@ export const newsSearch = (query) => {
 							query: query
 						}
 					} else {
-						payload = { message: `No results found for '${query}'` }
+						payload = { message: `No results found for '${query}'.` }
 					}
 					
 					dispatch({ type: NEWS_SEARCH, payload: payload });
@@ -36,7 +36,7 @@ export const newsSearch = (query) => {
 				})
 				.catch(err => {
 					console.log("error...", err)
-					dispatch({ type: NEWS_SEARCH, payload: { message: 'no results found' }});
+					dispatch({ type: NEWS_SEARCH, payload: { message: 'No results found. It looks like there was an error in the search.' }});
 				});
 
 		};

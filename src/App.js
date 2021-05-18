@@ -1,5 +1,6 @@
 import Search from './components/search.js';
 import History from './components/history.js';
+import Notes from './components/notes.js';
 
 import React from "react";
 import {
@@ -23,6 +24,9 @@ function App() {
 						<li>
 							<NavLink exact activeClassName="active" to="/history">History</NavLink>
 						</li>
+						<li>
+							<NavLink exact activeClassName="active" to="/notes">Notes</NavLink>
+						</li>
 					</ul>
 				</nav>
 
@@ -32,6 +36,9 @@ function App() {
 					</Route>
 					<Route path="/history">
 						<History />
+					</Route>
+					<Route path="/notes">
+						<Notes />
 					</Route>
 				</Switch>
 				

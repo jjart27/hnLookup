@@ -12,6 +12,7 @@ export default function(state = { searchHistory: [] }, action) {
 
 			if (_.get(action.payload,'query')) {
 				searchHistory.push(action.payload.query)
+				searchHistory = _.uniq(searchHistory)
 			}
 
 			return { 
