@@ -2,7 +2,7 @@
 
 This small react app is a simple search to query stories from [Hacker News Algolia API](https://hn.algolia.com/api) and display results.
 
-It also has a History tab to show a list of terms that used for successful searching (terms that returned results).
+It also has a History tab to show a list of terms that were used for successful searching (terms that returned results).
 
 ## Available Scripts
 
