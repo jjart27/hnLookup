@@ -11,7 +11,7 @@ class History extends Component {
 			<div>
 				<h1>search history</h1>
 				<p>
-					Below is a list of searched terms you have used which returned results.
+					Below is a list of unique searched terms you have used which returned results.
 				</p>
 
 				{ this.props.searchHistory.length > 0 ? (

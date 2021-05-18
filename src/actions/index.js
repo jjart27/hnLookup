@@ -6,7 +6,7 @@ import {
 
 import _ from 'lodash';
 
-export const newsSearch = (query) => {
+export const newsSearch = (query, page) => {
 	if (query.length < 3) {
 		return function (dispatch) {
 			dispatch({ type: NEWS_SEARCH, payload: { results: [], message: 'please enter a valid search term' }});
@@ -16,7 +16,10 @@ export const newsSearch = (query) => {
 
 		return function (dispatch) {
 
-			const request_url = `http://hn.algolia.com/api/v1/search?query=${query}&tags=story`
+			if (!page || page < 0) { page = 1 } 
+			console.log("page: ", page)
+
+			const request_url = `http://hn.algolia.com/api/v1/search?query=${query}&tags=story&page=${page}`
 
 			get(request_url)
 				.then(response => {
@@ -25,7 +28,9 @@ export const newsSearch = (query) => {
 					if (_.get(response,'data.hits', []).length > 0) {
 						payload = {
 							results: response.data.hits, 
-							query: query
+							query: query,
+							pages: response.data.nbPages, 
+							curPage: page 
 						}
 					} else {
 						payload = { message: `No results found for '${query}'` }

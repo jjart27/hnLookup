@@ -127,9 +127,10 @@ nav li a:hover {
 .resultsCount {
 	font-weight: bold;
 	text-align: right;
-	padding:0;
-	border-bottom:1px dashed #444;
 	font-size:12px;
+	padding:0;
+	border-bottom:1px solid #888;
+	margin-top:10px;
 }
 .resultsCount span {
 	background-color: #888;
@@ -141,6 +142,7 @@ nav li a:hover {
 .resultsCountBtm {
 	border-bottom: none;
 	margin-bottom: 15px;
+	margin-top:0;
 }
 .resultsCountBtm span {
 	border-top-left-radius: 0;

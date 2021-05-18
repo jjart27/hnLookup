@@ -5,6 +5,7 @@ import { newsSearch, clearSearchResults } from '../actions';
 import _ from 'lodash';
 
 import SearchRecord from './searchrecord.js';
+import Pagination from './pagination.js';
 
 
 class Search extends Component {
@@ -14,10 +15,12 @@ class Search extends Component {
 		this.state = {
 			value: "",
 			showData: false,
+			curPage: 1
 		}
 
 		// clear out previous search results
 		this.props.clearSearchResults()
+
 	}
 
 
@@ -27,7 +30,10 @@ class Search extends Component {
 		})
 	};
 
+
 	submitHandler = event => {
+		// console.log("submitHandler / ", this.state.value, this.state.curPage, (this.props.searchCurPage + 1))
+		// this.props.newsSearch(this.state.value, this.state.curPage)
 		this.props.newsSearch(this.state.value)
 	}
 
@@ -37,22 +43,42 @@ class Search extends Component {
 		})
 	};
 
+	prevPage = event => {
+		console.log("prevPage...")
+		// this.setState({ curPage: (this.props.searchCurPage - 1 )})
+		// this.submitHandler()
+		this.props.newsSearch(this.state.value, (this.props.searchCurPage - 1) )
+	}
+
+	nextPage = event => {
+		console.log("nextPage...", this.props.searchCurPage + 1)
+		// this.setState({ curPage: (this.props.searchCurPage + 1) })
+		// this.submitHandler()
+		this.props.newsSearch(this.state.value, (this.props.searchCurPage + 1) )
+	}
 
 	render() {
 		const { props } = this.props
 
+		console.log("search - ", this.props)
+
+		// search results message if any
 		const searchMessage = _.get(this.props,'searchMessage');
 		let resultsMessage;
 		if (searchMessage) {
 			resultsMessage = <div className="errMessage">{searchMessage}</div>;
 		}
 
+		// search results
 		const searchResults = _.get(this.props,'searchResults', []);
 		let resultsCount;
 		if (searchResults.length > 0) {
 			resultsCount = <span>{this.props.searchResults.length} results returned</span>;
 		}
 
+		const pages = _.get(this.props,'searchPages',0)
+
+		// const curPage = _.get(this.props,'searchCurPage') || this.state.curPage
 
 		return (
 			<div>
@@ -79,6 +105,14 @@ class Search extends Component {
 					
 				{resultsMessage}
 
+				<Pagination 
+					curPage={this.props.searchCurPage} 
+					pages={pages} 
+					prevPage={this.prevPage} 
+					nextPage={this.nextPage} 
+					key="1" 
+				/>
+
 				<div className="resultsCount">
 					{resultsCount}
 				</div>
@@ -95,7 +129,6 @@ class Search extends Component {
 					{resultsCount}
 				</div>
 
-				<hr />
 
 				{ searchResults.length > 0 ? (
 					<div style={{height:"35px", marginTop:"30px"}}>
@@ -116,9 +149,11 @@ class Search extends Component {
 
 }
 
-const mapStateToProps = ({ searchResults, searchMessage }) => {
+const mapStateToProps = ({ searchResults, searchPages, searchMessage, searchCurPage }) => {
 	return {
 		searchResults: searchResults,
+		searchPages: searchPages,
+		searchCurPage: searchCurPage,
 		searchMessage: searchMessage
 	};
 }

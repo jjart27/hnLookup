@@ -12,11 +12,14 @@ export default function(state = { searchHistory: [] }, action) {
 
 			if (_.get(action.payload,'query')) {
 				searchHistory.push(action.payload.query)
+				searchHistory = _.uniq(searchHistory)
 			}
 
 			return { 
 				...state, 
 				searchResults: _.get(action.payload,'results', []), 
+				searchPages: _.get(action.payload,'pages',0), 
+				searchCurPage: _.get(action.payload,'curPage',1), 
 				searchMessage: _.get(action.payload,'message'), 
 				searchHistory: searchHistory
 			}
